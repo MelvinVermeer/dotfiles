@@ -17,18 +17,39 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-alias gco="git checkout"
-alias gs="git status"
-alias pr="gh pr checkout"
-alias gc="git commit -m"
-alias gp="git push"
+alias cov="open coverage/lcov-report/index.html"
 alias ga="git add ."
+alias gc="git commit -m"
+alias gca="git commit --amend --no-edit"
+alias gco="git checkout"
+alias gcp="git cherry-pick"
+alias gl="git log --oneline"
+alias gln="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gmd="git fetch --all && git merge origin/develop"
+alias gmm="git fetch --all && git merge origin/main"
+alias grm="git fetch --all && git rebase origin/main"
+alias gp="git push --no-verify"
+alias gr1="git reset HEAD~1"
 alias grc="git rebase --continue"
 alias grs="git rebase --skip"
-alias gca="git commit --amend --no-edit"
-alias gcp="git cherry-pick"
-alias gln="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
-alias wip="git add . && git commit -m 'wip' -n"
-alias gl="git log --oneline"
+alias gs="git status"
+alias pr="gh pr create -w"
 alias update="git fetch && git rebase origin/master"
-alias lego="nx run lego-shared-components:storybook"
+alias wip="git add . && git commit -m 'wip' -n"
+alias p="pnpm"
+alias gistory="git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
+
+# bun completions
+[ -s "/Users/melvinvermeer/.bun/_bun" ] && source "/Users/melvinvermeer/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/melvinvermeer/Library/pnpm"
+case ":$PATH:" in
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
